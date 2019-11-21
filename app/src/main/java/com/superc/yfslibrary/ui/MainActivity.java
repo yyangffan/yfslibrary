@@ -12,7 +12,13 @@ import com.superc.yyfflibrary.utils.titlebar.TitleUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+/********************************************************************
+  @version: 1.0.0
+  @description:
+  @author: EDZ
+  @time: 2019/11/21 15:20
+  @变更历史:
+********************************************************************/
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.main_click)
