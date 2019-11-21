@@ -64,6 +64,10 @@ public abstract class BaseActivity extends SlideBackActivity {
         }
     }
 
+    public void toChangeTitleCor(boolean is_deep){
+        TitleUtils.setStatusTextColor(is_deep, this);
+    }
+
 
     public abstract int getContentLayoutId();
 

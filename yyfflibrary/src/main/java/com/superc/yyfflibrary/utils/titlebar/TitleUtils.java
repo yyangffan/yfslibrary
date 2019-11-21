@@ -128,6 +128,31 @@ public class TitleUtils {
      * 改变魅族的状态栏字体为黑色，要求FlyMe4以上
      */
     private static void processFlyMe(boolean isLightStatusBar, Activity activity) {
+        if (activity != null) {
+            Window window = activity.getWindow();
+            try {
+                WindowManager.LayoutParams lp = window.getAttributes();
+                Field darkFlag = WindowManager.LayoutParams.class
+                        .getDeclaredField("MEIZU_FLAG_DARK_STATUS_BAR_ICON");
+                Field meizuFlags = WindowManager.LayoutParams.class
+                        .getDeclaredField("meizuFlags");
+                darkFlag.setAccessible(true);
+                meizuFlags.setAccessible(true);
+                int bit = darkFlag.getInt(null);
+                int value = meizuFlags.getInt(lp);
+                if (isLightStatusBar) {
+                    value |= bit;
+                } else {
+                    value &= ~bit;
+                }
+                meizuFlags.setInt(lp, value);
+                window.setAttributes(lp);
+            } catch (Exception e) {
+
+            }
+        }
+        /*old*/
+        /*
         WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
         try {
             Class<?> instance = Class.forName("android.view.WindowManager$LayoutParams");
@@ -142,8 +167,9 @@ public class TitleUtils {
             }
         } catch (Exception ignored) {
             ignored.printStackTrace();
-        }
+        }*/
     }
+
 
     /**
      * 改变小米的状态栏字体颜色为黑色, 要求MIUI6以上  lightStatusBar为真时表示黑色字体
@@ -155,8 +181,8 @@ public class TitleUtils {
             Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
             Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
             darkModeFlag = field.getInt(layoutParams);
-            Method extraFlagField = clazz.getMethod("setExtraFlags",int.class,int.class);
-            extraFlagField.invoke(activity.getWindow(), lightStatusBar? darkModeFlag : 0, darkModeFlag);
+            Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
+            extraFlagField.invoke(activity.getWindow(), lightStatusBar ? darkModeFlag : 0, darkModeFlag);
         } catch (Exception ignored) {
             ignored.printStackTrace();
         }
@@ -168,6 +194,7 @@ public class TitleUtils {
 
     /**
      * 判断手机是否是小米
+     *
      * @return
      */
     public static boolean isMIUI() {
@@ -183,6 +210,7 @@ public class TitleUtils {
 
     /**
      * 判断手机是否是魅族
+     *
      * @return
      */
     public static boolean isFlyme() {
@@ -197,7 +225,8 @@ public class TitleUtils {
 
     /**
      * 设置状态栏文字色值为深色调
-     * @param useDart 是否使用深色调
+     *
+     * @param useDart  是否使用深色调
      * @param activity
      */
     public static void setStatusTextColor(boolean useDart, Activity activity) {
