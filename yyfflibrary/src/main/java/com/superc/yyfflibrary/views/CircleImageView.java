@@ -1,4 +1,4 @@
-package com.superc.yfslibrary.ui;
+package com.superc.yyfflibrary.views;
 
 import android.content.Context;
 import android.graphics.Bitmap;
