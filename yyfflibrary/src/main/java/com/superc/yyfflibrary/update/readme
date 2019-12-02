@@ -1,0 +1,124 @@
+
+/**
+*   更新方法类的使用包括： 进度条的xml 、 Application 、Activity 的使用示例
+*   需要将UpdateManager  及 Applicaiton中的配置copy到自己的程序中
+*   注意目前需要添加  安装apk的权限<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+*
+*/
+/*---------------------------------------------Activity中更新apk---------------------------------------------*/
+
+    /**
+     * 进行接口查询获取新版本app网络路径
+     * UPDATE="接口访问地址"
+     * client 2-安卓  1-ios
+     */
+    private void request(String versionName) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("client", "2");
+        map.put("version", versionName);
+
+        Observable<JSONObject> jsonObjectObservable = DevRing.httpManager().getService(PhaseApiService.class).getByClient(EncryPtionUtil.getInstance(this).toEncryption(map));
+        EncryPtionHttp.getInstance(this).getHttpResult(jsonObjectObservable, new EncryPtionHttp.OnHttpResult() {
+            @Override
+            public void onSuccessResult(JSONObject result) {
+                boolean code = result.getBoolean("code");
+                if (code) {
+                    JSONObject data = result.getJSONObject("data");
+                    isGents = data.getBoolean("consistent");//是否更新
+                    if (!isGents) {
+                        String urlString = data.getString("updateurl");//更新地址
+                        String updatecontent = data.getString("updatecontent");//更新说明
+                        isqiangz = data.getInteger("forcedupdates") == 0 ? false : true;//是否强制更新 0否 1是
+                        showUpdateDialog(updatecontent, urlString);
+                    }
+                }
+            }
+
+            @Override
+            public void onErrorResult(HttpThrowable httpThrowable) {
+                Log.e(TAG, "onError: " + httpThrowable.toString());
+            }
+        });
+
+    }
+
+    private void showUpdateDialog(String msg, final String urlString) {
+        mUpdateManag = new UpdateManager(MainActivity.this, urlString);
+        YfsRemindDialog build_dialog = new YfsRemindDialog.Builder(this).title("提示").content(TextUtils.isEmpty(msg) ? "需要更新后使用" : msg).left("取消").right("确定").build();
+        build_dialog.setOnTextClickListener(new YfsRemindDialog.OnTextClickListener() {
+            @Override
+            public void onLeftClickListener() {
+                super.onLeftClickListener();
+                if (isqiangz) {
+                    MainActivity.this.finish();
+                }
+            }
+
+            @Override
+            public void onRightClickListener() {
+                super.onRightClickListener();
+                mUpdateManag.downLoadApk();
+                showDownLoadDialog();
+            }
+        });
+        build_dialog.show();
+    }
+
+    /**
+     * 弹出下载框
+     */
+    public void showDownLoadDialog() {
+        downloadDialog = new AlertDialog.Builder(this).create();
+        downloadDialog.show();
+        downloadDialog.setTitle("版本更新中...");
+        final LayoutInflater inflater = LayoutInflater.from(this);
+        View v = inflater.inflate(R.layout.dialog_progress, null);
+        final ProgressBar progressBar = (ProgressBar) v.findViewById(R.id.pb_update_progress);
+        Button btnPause = (Button) v.findViewById(R.id.pause);
+        final TextView tvProgress = (TextView) v.findViewById(R.id.tv_progress);
+        downloadDialog.setContentView(v);
+        btnPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 终止下载
+//                isInterceptDownload = true;
+                downloadDialog.dismiss();
+            }
+        });
+
+        downloadDialog.setCancelable(false);
+        mUpdateManag.setOnProgressUpdateListener(new UpdateManager.OnProgressUpdateListener() {
+            @Override
+            public void onProgressUpdateListener(int pros, boolean isEnd) {
+                if (!isEnd) {
+                    progressBar.setProgress(pros);
+                    tvProgress.setText(pros+"");
+                } else {
+                    downloadDialog.dismiss();
+                }
+
+            }
+        });
+
+    }
+/*---------------------------------------------Application中配置---------------------------------------------*/
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="更换成自己的包名.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
+/*---------------------------------------------Application权限添加---------------------------------------------*/
+        <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
+
+
+
+
+
+

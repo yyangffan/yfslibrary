@@ -41,7 +41,7 @@ public class DateUtil {
      * @param distanceDay 前几天 如获取前7天日期则传-7即可；如果后7天则传7
      * @return
      */
-    public static String getDate(String de, int distanceDay) {
+    public static String getForeDate(String de, int distanceDay) {
         SimpleDateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
         Date endDate = null;
         try {
@@ -64,7 +64,7 @@ public class DateUtil {
      * @param simple_examp:yyyy-MM-dd HH:mm:ss
      * @return
      */
-    public static String getTimeStamp(String time, String simple_examp) {
+    public static String getTimeLong(String time, String simple_examp) {
         SimpleDateFormat sdr = new SimpleDateFormat(simple_examp, Locale.CHINA);
         Date date;
         String times = null;
