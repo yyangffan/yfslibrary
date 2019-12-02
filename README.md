@@ -1,4 +1,19 @@
 # yfslibrary自己使用的类库
+# 使用方法
+**主项目添加
+**allprojects {  
+		repositories {  
+			...  
+			maven { url 'https://jitpack.io' }  
+		}  
+	}**  
+  
+**app项目添加**  	
+**dependencies {  
+	        implementation 'com.github.yyangffan:yfslibrary:1.0'
+	}**  
+## 通过 https://jitpack.io  获取版本内容  
+
 ## 类库：
 * 日期，MD5加密，图片保存  
 * SharePreference，ToastUtil  
