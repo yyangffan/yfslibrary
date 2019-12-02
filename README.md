@@ -11,3 +11,14 @@
 **类似于商品规格选择的RecyclerView，放不下自动换行** 
 
 ***github中Readme的基本写法(https://blog.csdn.net/weixin_42795141/article/details/89322823)***
+
+# 使用方法
+**allprojects {  
+		repositories {  
+			...  
+			maven { url 'https://jitpack.io' }  
+		}  
+	}**  
+**dependencies {  
+	        implementation 'com.github.yyangffan:yfslibrary:Tag'  
+	}**  
