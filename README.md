@@ -13,12 +13,15 @@
 ***github中Readme的基本写法(https://blog.csdn.net/weixin_42795141/article/details/89322823)***
 
 # 使用方法
+**主项目添加
 **allprojects {  
 		repositories {  
 			...  
 			maven { url 'https://jitpack.io' }  
 		}  
 	}**  
+  
+**app项目添加**  	
 **dependencies {  
 	        implementation 'com.github.yyangffan:yfslibrary:Tag'  
 	}**  
