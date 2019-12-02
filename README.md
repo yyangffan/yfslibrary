@@ -25,3 +25,4 @@
 **dependencies {  
 	        implementation 'com.github.yyangffan:yfslibrary:Tag'  
 	}**  
+## 通过 https://jitpack.io  获取版本内容  
