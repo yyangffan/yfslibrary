@@ -3,20 +3,17 @@ package com.superc.yyfflibrary.base;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.superc.yyfflibrary.utils.ToastUtil;
 
 public abstract class BaseFragment extends Fragment {
 
-    @Override
+    /*@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(getContentLayoutId(), container, false);
     }
-
+*/
 
     /**
      * @param cls 跳转到的Activity名称class
@@ -49,7 +46,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
-    public abstract int getContentLayoutId();
+    /*public abstract int getContentLayoutId();*/
 
     public abstract void init();
 
