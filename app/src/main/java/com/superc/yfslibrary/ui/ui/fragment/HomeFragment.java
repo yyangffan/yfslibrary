@@ -1,18 +1,20 @@
 package com.superc.yfslibrary.ui.ui.fragment;
 
 
-import com.superc.yfslibrary.R;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import com.superc.yyfflibrary.base.BaseFragment;
 
 public class HomeFragment extends BaseFragment {
-
     @Override
-    public int getContentLayoutId() {
-        return R.layout.fragment_home;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
     }
 
     @Override
     public void init() {
-    }
 
+    }
 }
