@@ -13,4 +13,15 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/date_picker_bg</item>
     </style>
+    <style name="WorkDialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="Dialog_ent_out">
+        <item name="android:windowEnterAnimation">@anim/dialog_bot_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bot_out</item>
+    </style>
 </resources>

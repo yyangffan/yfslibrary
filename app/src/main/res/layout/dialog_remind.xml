@@ -84,14 +84,14 @@
             android:gravity="center"
             android:padding="@dimen/dp_10"
             android:text="取消"
-            android:textColor="@color/txt_week"
+            android:textColor="#333"
             android:textSize="16sp"/>
 
         <View
             android:id="@+id/dialog_remind_btline"
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/xml_bg"/>
+            android:background="#666"/>
 
         <TextView
             android:id="@+id/dialog_remind_right"

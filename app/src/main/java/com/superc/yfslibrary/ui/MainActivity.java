@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.superc.yfslibrary.R;
 import com.superc.yfslibrary.ui.customdate.CustomDatePicker;
 import com.superc.yfslibrary.ui.customdate.DateFormatUtils;
+import com.superc.yfslibrary.ui.dialog.DialogPicbig;
 import com.superc.yfslibrary.ui.ui.DetailActivity;
 import com.superc.yyfflibrary.base.BaseActivity;
 import com.superc.yyfflibrary.utils.titlebar.TitleUtils;
@@ -46,7 +47,7 @@ public class MainActivity extends BaseActivity {
         initDate();
     }
 
-    @OnClick({R.id.main_click, R.id.main_circle})
+    @OnClick({R.id.main_click, R.id.main_circle,R.id.main_bt})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.main_click:
@@ -62,6 +63,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.main_circle:
                 mTimerPicker.show(mMainClick.getText().toString());
+                break;
+            case R.id.main_bt:
+                new DialogPicbig(this,"http://005.tv/uploads/allimg/c151227/14512102261K40-251138.jpg").show();
                 break;
         }
     }
