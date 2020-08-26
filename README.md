@@ -10,7 +10,7 @@
   
 **app项目添加**  	
 **dependencies {  
-	        implementation 'com.github.yyangffan:yfslibrary:1.0'
+	        implementation 'com.github.yyangffan:yfslibrary:1.2'
 	}**  
 ## 通过 https://jitpack.io  获取版本内容  
 
