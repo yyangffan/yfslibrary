@@ -15,8 +15,8 @@ public abstract class BindBaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         TitleUtils.getStatusBarHeight(this);
         super.onCreate(savedInstanceState);
+        TitleUtils.setStatusBar(this, false, false);
         onBindCreat();
-        TitleUtils.setStatusTextColor(false, this);
         TAG = getLocalClassName();
         init();
 
